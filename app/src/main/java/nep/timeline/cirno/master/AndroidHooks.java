@@ -28,6 +28,7 @@ import nep.timeline.cirno.hooks.android.recorder.RecorderEventHook;
 import nep.timeline.cirno.hooks.android.recorder.ReleaseRecorderHook;
 import nep.timeline.cirno.hooks.android.signal.SendSignalHook;
 import nep.timeline.cirno.hooks.android.signal.SendSignalQuietHook;
+import nep.timeline.cirno.hooks.android.vpn.VpnStateHook;
 import nep.timeline.cirno.hooks.android.wakelock.WakeLockHook;
 import nep.timeline.cirno.services.BinderService;
 
@@ -76,6 +77,8 @@ public class AndroidHooks {
         // Recorder
         new RecorderEventHook(classLoader);
         new ReleaseRecorderHook(classLoader);
+        // Vpn
+        new VpnStateHook(classLoader);
         // ReKernel
         BinderService.start(classLoader);
     }

@@ -14,6 +14,7 @@ public class AppState {
     private boolean location = false;
     private boolean audio = false;
     private boolean recording = false;
+    private boolean vpn = false;
     private final Set<IBinder> activities = new HashSet<>();
     private final Set<IBinder> locationListeners = new HashSet<>();
     private final Set<Integer> interfaceIds = new HashSet<>();
@@ -48,6 +49,13 @@ public class AppState {
         if (recording == value)
             return false;
         recording = value;
+        return true;
+    }
+
+    public synchronized boolean setVpn(boolean value) {
+        if (vpn == value)
+            return false;
+        vpn = value;
         return true;
     }
 }

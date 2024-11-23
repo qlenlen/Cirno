@@ -12,7 +12,7 @@ import nep.timeline.cirno.utils.FrozenRW;
 
 public class FreezerService {
     public static void freezer(AppRecord appRecord) {
-        if (appRecord.isFrozen() || appRecord.isSystem() || appRecord.getAppState().isVisible() || appRecord.getAppState().isLocation() || appRecord.getAppState().isAudio() || appRecord.getAppState().isRecording())
+        if (appRecord.isFrozen() || appRecord.isSystem() || appRecord.getAppState().isVisible() || appRecord.getAppState().isLocation() || appRecord.getAppState().isAudio() || appRecord.getAppState().isRecording() || appRecord.getAppState().isVpn())
             return;
 
         for (ProcessRecord processRecord : appRecord.getProcessRecords()) {
