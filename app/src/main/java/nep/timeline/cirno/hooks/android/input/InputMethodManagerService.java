@@ -46,17 +46,8 @@ public class InputMethodManagerService extends MethodHook {
                 if (id == null)
                     return;
 
-                Object settings;
-
-                int userId;
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                    userId = XposedHelpers.getIntField(param.thisObject, "mCurrentUserId");
-                    settings = XposedHelpers.callStaticMethod(XposedHelpers.findClassIfExists("com.android.server.inputmethod.InputMethodSettingsRepository", classLoader), "get", userId);
-                }
-                else {
-                    settings = XposedHelpers.getObjectField(param.thisObject, "mSettings");
-                    userId = (settings == null) ? ActivityManagerService.getCurrentOrTargetUserId() : XposedHelpers.getIntField(settings, "mCurrentUserId");
-                }
+                int userId = ActivityManagerService.getCurrentOrTargetUserId();
+                Object settings = (Build.VERSION.SDK_INT > Build.VERSION_CODES.UPSIDE_DOWN_CAKE) ? XposedHelpers.callStaticMethod(XposedHelpers.findClassIfExists("com.android.server.inputmethod.InputMethodSettingsRepository", classLoader), "get", userId) : XposedHelpers.getObjectField(param.thisObject, "mSettings");
 
                 synchronized (InputMethodData.class) {
                     if (InputMethodData.instance == null) {
