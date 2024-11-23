@@ -42,7 +42,7 @@ public class ListenerRegisterHook extends MethodHook {
         return new AbstractMethodHook() {
             @Override
             protected void afterMethod(MethodHookParam param) {
-                boolean isGPS = param.args[0].equals(LocationManager.GPS_PROVIDER);
+                boolean isGPS = LocationManager.GPS_PROVIDER.equals(param.args[0]);
                 if (!isGPS)
                     return;
 

@@ -24,6 +24,8 @@ import nep.timeline.cirno.hooks.android.location.ListenerUnregisterHook;
 import nep.timeline.cirno.hooks.android.network.NetworkManagerHook;
 import nep.timeline.cirno.hooks.android.process.ProcessAddHook;
 import nep.timeline.cirno.hooks.android.process.ProcessRemoveHook;
+import nep.timeline.cirno.hooks.android.recorder.RecorderEventHook;
+import nep.timeline.cirno.hooks.android.recorder.ReleaseRecorderHook;
 import nep.timeline.cirno.hooks.android.signal.SendSignalHook;
 import nep.timeline.cirno.hooks.android.signal.SendSignalQuietHook;
 import nep.timeline.cirno.hooks.android.wakelock.WakeLockHook;
@@ -71,6 +73,9 @@ public class AndroidHooks {
         new HansKernelUnfreezeHook(classLoader);
         new MilletBinderTransHook(classLoader);
         new SamsungBinderTransHook(classLoader);
+        // Recorder
+        new RecorderEventHook(classLoader);
+        new ReleaseRecorderHook(classLoader);
         // ReKernel
         BinderService.start(classLoader);
     }

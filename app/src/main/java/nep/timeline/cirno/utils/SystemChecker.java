@@ -27,4 +27,8 @@ public class SystemChecker {
     {
         return XposedHelpers.findClassIfExists("com.android.server.am.IVivoBroadcastQueueModern", classLoader) != null;
     }
+
+    public static boolean isNubia(ClassLoader classLoader) {
+        return XposedHelpers.findClassIfExists("cn.nubia.server.appmgmt.ApplicationControllerUtils", classLoader) != null;
+    }
 }
