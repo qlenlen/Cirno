@@ -16,6 +16,7 @@ import nep.timeline.cirno.hooks.android.binder.HansKernelUnfreezeHook;
 import nep.timeline.cirno.hooks.android.binder.MilletBinderTransHook;
 import nep.timeline.cirno.hooks.android.binder.SamsungBinderTransHook;
 import nep.timeline.cirno.hooks.android.broadcast.BroadcastDeliveryHook;
+import nep.timeline.cirno.hooks.android.broadcast.BroadcastIntentHook;
 import nep.timeline.cirno.hooks.android.broadcast.BroadcastSkipHook;
 import nep.timeline.cirno.hooks.android.input.InputMethodManagerService;
 import nep.timeline.cirno.hooks.android.location.ListenerRegisterHook;
@@ -56,6 +57,7 @@ public class AndroidHooks {
         new AlarmManagerService(classLoader);
         // Broadcast
         new BroadcastSkipHook(classLoader);
+        new BroadcastIntentHook(classLoader);
         new BroadcastDeliveryHook(classLoader);
         // WakeLock
         new WakeLockHook(classLoader);
