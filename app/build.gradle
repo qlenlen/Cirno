@@ -7,22 +7,12 @@ android {
     namespace = 'nep.timeline.cirno'
     compileSdk 35
 
-    ndkVersion "26.3.11579264"
-
     defaultConfig {
         applicationId 'nep.timeline.cirno'
         minSdk 31
         targetSdk 35
         versionCode 3
         versionName 'Baka'
-
-        externalNativeBuild {
-            cmake {
-                cppFlags ''
-                cFlags ''
-                arguments "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
-            }
-        }
     }
 
     buildTypes {
@@ -51,13 +41,6 @@ android {
     lint {
         abortOnError false
         checkReleaseBuilds false
-    }
-
-    externalNativeBuild {
-        cmake {
-            path file('src/main/cpp/CMakeLists.txt')
-            version '3.22.1'
-        }
     }
 
     android.applicationVariants.configureEach {
