@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Build;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -33,8 +31,12 @@ public class BroadcastIntentHook {
                if (method.getName().equals(methodName) && (targetMethod == null || targetMethod.getParameterTypes().length < method.getParameterTypes().length))
                    targetMethod = method;
 
-           ArrayList<Object> arrayList = new ArrayList<>(Arrays.asList(targetMethod.getParameterTypes()));
-           arrayList.add(new AbstractMethodHook() {
+           if (targetMethod == null) {
+               Log.e("无法监听广播意图!");
+               return;
+           }
+
+           XposedBridge.hookMethod(targetMethod, new AbstractMethodHook() {
                @Override
                protected void beforeMethod(MethodHookParam param) {
                    int intentArgsIndex = 3;
@@ -66,8 +68,6 @@ public class BroadcastIntentHook {
                    }
                }
            });
-
-           XposedHelpers.findAndHookMethod(clazz, targetMethod.getName(), arrayList.toArray());
 
            Log.i("监听广播意图");
        } catch (Throwable throwable) {
