@@ -13,11 +13,11 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: set up JDK 17
+      - name: set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: 17
+          java-version: 21
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -25,18 +25,26 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
+      - uses: r0adkll/sign-android-release@v1
+        name: Sign app APK
+        id: sign_app
+        with:
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
           name: Cirno-Debug
           path: ${{github.workspace}}/app/build/outputs/apk/debug/*.apk
           if-no-files-found: warn
-          retention-days: 1
-          
+
       - name: Upload Release APK
         uses: actions/upload-artifact@v4
         with:
           name: Cirno-Release
-          path: ${{github.workspace}}/app/build/outputs/apk/release/*.apk
+          path: ${{steps.sign_app.outputs.signedReleaseFile}}
           if-no-files-found: warn
-          retention-days: 1
