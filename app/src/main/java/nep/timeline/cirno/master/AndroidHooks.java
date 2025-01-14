@@ -19,6 +19,7 @@ import nep.timeline.cirno.hooks.android.broadcast.BroadcastDeliveryHook;
 import nep.timeline.cirno.hooks.android.broadcast.BroadcastIntentHook;
 import nep.timeline.cirno.hooks.android.broadcast.BroadcastSkipHook;
 import nep.timeline.cirno.hooks.android.input.InputMethodManagerService;
+import nep.timeline.cirno.hooks.android.intent.PendingIntentHook;
 import nep.timeline.cirno.hooks.android.location.ListenerRegisterHook;
 import nep.timeline.cirno.hooks.android.location.ListenerUnregisterHook;
 import nep.timeline.cirno.hooks.android.network.NetworkManagerHook;
@@ -79,6 +80,8 @@ public class AndroidHooks {
         new ReleaseRecorderHook(classLoader);
         // Vpn
         new VpnStateHook(classLoader);
+        // Intent
+        new PendingIntentHook(classLoader);
         // ReKernel
         BinderService.start(classLoader);
     }
