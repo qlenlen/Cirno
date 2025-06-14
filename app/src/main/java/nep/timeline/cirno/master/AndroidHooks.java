@@ -1,19 +1,15 @@
 package nep.timeline.cirno.master;
 
 import android.os.FileObserver;
-
 import nep.timeline.cirno.configs.ConfigFileObserver;
 import nep.timeline.cirno.hooks.android.activity.ActivityManagerServiceHook;
 import nep.timeline.cirno.hooks.android.activity.ActivityStatsHook;
 import nep.timeline.cirno.hooks.android.alarms.AlarmManagerService;
 import nep.timeline.cirno.hooks.android.anr.ANRErrorStateHook;
 import nep.timeline.cirno.hooks.android.anr.ANRHelperHooks;
-import nep.timeline.cirno.hooks.android.anr.ANRHook;
 import nep.timeline.cirno.hooks.android.audio.AudioStateHook;
 import nep.timeline.cirno.hooks.android.audio.PlayerBanHook;
 import nep.timeline.cirno.hooks.android.audio.SendMediaButtonHook;
-import nep.timeline.cirno.hooks.android.binder.HansKernelUnfreezeHook;
-import nep.timeline.cirno.hooks.android.binder.MilletBinderTransHook;
 import nep.timeline.cirno.hooks.android.binder.SamsungBinderTransHook;
 import nep.timeline.cirno.hooks.android.broadcast.BroadcastDeliveryHook;
 import nep.timeline.cirno.hooks.android.broadcast.BroadcastIntentHook;
@@ -40,7 +36,6 @@ public class AndroidHooks {
         fileObserver.startWatching();
 
         // ANR
-        new ANRHook(classLoader);
         new ANRErrorStateHook(classLoader);
         new ANRHelperHooks(classLoader);
         // Signal
@@ -72,8 +67,6 @@ public class AndroidHooks {
         new ProcessAddHook(classLoader);
         new ProcessRemoveHook(classLoader);
         // Binder
-        new HansKernelUnfreezeHook(classLoader);
-        new MilletBinderTransHook(classLoader);
         new SamsungBinderTransHook(classLoader);
         // Recorder
         new RecorderEventHook(classLoader);
